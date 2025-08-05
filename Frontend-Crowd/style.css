@@ -102,7 +102,6 @@ body {
     border-radius: 1rem;
     padding: 2rem;
     margin-bottom: 2rem;
-    border: 1px solid rgba(239,68,68,0.2);
     box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
 }
 
@@ -111,22 +110,6 @@ body {
     align-items: center;
     gap: 0.75rem;
     margin-bottom: 1.5rem;
-}
-
-.vote-icon {
-    background: #dc2626;
-    padding: 0.5rem;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.vote-icon::before {
-    content: "🗳️";
-    font-size: 1.2rem;
 }
 
 .live-label {
@@ -298,37 +281,6 @@ body {
 .status-time-up { color: #f87171; }
 .status-voted { color: #34d399; }
 .status-choose { color: #fbbf24; }
-
-.cinema-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    text-align: center;
-}
-
-.cinema-card {
-    background: rgba(17,24,39,0.5);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    border: 1px solid rgba(239,68,68,0.2);
-}
-
-.cinema-card .emoji {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    display: block;
-}
-
-.cinema-card .title {
-    color: #f87171;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-}
-
-.cinema-card .subtitle {
-    color: #9ca3af;
-    font-size: 0.875rem;
-}
 
 .floating-element {
     position: fixed;

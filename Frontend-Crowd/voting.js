@@ -23,7 +23,6 @@ function updateTimer() {
     progressFillEl.style.width = `${progress}%`;
 
     if (timeLeft <= 0) {
-        // Time's up
         statusMessageEl.innerHTML = '<span class="status-time-up">Voting beendet!</span>';
         disableAllOptions();
         updateVoteButton();
@@ -55,7 +54,6 @@ function submitVote() {
     totalVotes++;
     totalVotesEl.textContent = totalVotes;
 
-    // Add voted checkmark to selected option
     const selectedEl = optionsEl[selectedOption];
     selectedEl.classList.remove('selected');
     selectedEl.classList.add('voted');
