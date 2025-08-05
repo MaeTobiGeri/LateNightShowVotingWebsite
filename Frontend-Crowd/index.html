@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abiflix - Live Voting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="floating-element floating-1">🎬</div>
+    <div class="floating-element floating-2">🍿</div>
+    <div class="floating-element floating-3">⭐</div>
+
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="play-icon"></div>
+                <div class="logo">
+                    <h1>ABIFLIX</h1>
+                    <p>Nach 13 Staffeln abgesetzt</p>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-icon">👥</span>
+                    <span class="stat-value" id="totalVotes">127</span>
+                    <span>Live Votes</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">⏰</span>
+                    <span class="timer" id="timer">0:45</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="question-card">
+            <div class="voting-header">
+                <div class="vote-icon"></div>
+                <span class="live-label">LIVE VOTING</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <h2 class="question-title" id="questionTitle">Welchen Film-Song spielt die Band gerade?</h2>
+
+            <div class="options-grid" id="optionsGrid">
+                <div class="option" data-index="0">
+                    <div class="option-content">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Eye of the Tiger - Rocky</span>
+                    </div>
+                </div>
+                <div class="option" data-index="1">
+                    <div class="option-content">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Don't Stop Believin' - Journey</span>
+                    </div>
+                </div>
+                <div class="option" data-index="2">
+                    <div class="option-content">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">We Will Rock You - Queen</span>
+                    </div>
+                </div>
+                <div class="option" data-index="3">
+                    <div class="option-content">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Imperial March - Star Wars</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vote-button-container">
+                <button class="vote-button disabled" id="voteButton" disabled>
+                    Wähle eine Option
+                </button>
+            </div>
+
+            <div class="status-message" id="statusMessage">
+                <span class="status-choose">🎬 Wähle deine Antwort!</span>
+            </div>
+        </div>
+
+        <div class="cinema-cards">
+            <div class="cinema-card">
+                <span class="emoji">🎭</span>
+                <div class="title">Late Night Show</div>
+                <div class="subtitle">Live Performance</div>
+            </div>
+            <div class="cinema-card">
+                <span class="emoji">🎵</span>
+                <div class="title">Film Soundtrack</div>
+                <div class="subtitle">Rate the Music</div>
+            </div>
+            <div class="cinema-card">
+                <span class="emoji">🏆</span>
+                <div class="title">Abi 2025</div>
+                <div class="subtitle">13 Jahre Finale</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
