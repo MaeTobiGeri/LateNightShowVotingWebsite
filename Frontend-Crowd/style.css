@@ -19,6 +19,30 @@ body {
     z-index: 20;
 }
 
+.stats {
+    display: flex;
+    gap: 2rem;
+    text-align: right;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat-icon {
+    width: 24px;
+    height: 24px;
+    color: #f87171;
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+
 .header-content {
     display: flex;
     justify-content: space-between;
