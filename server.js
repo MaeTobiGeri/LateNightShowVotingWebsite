@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve maintenance panel
-app.use('/Frontend-Maintenance', express.static('Frontend-Maintenance'));
+app.use('/Admin', express.static('Frontend-Maintenance'));
 
 // Serve display page (for beamer/projector)
 app.use('/display', express.static('Frontend-Display'));
@@ -154,11 +154,9 @@ wss.on('connection', (ws) => {
     });
 });
 
-// Authentication credentials (stored server-side)
 const ADMIN_USERNAME = 'LNS-Admin';
 const ADMIN_PASSWORD = 'LNS2026.root';
 
-// Simple session storage (in production, use a proper session management library)
 const activeSessions = new Set();
 
 // Generate simple session token
