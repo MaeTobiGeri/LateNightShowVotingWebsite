@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abiflix - Live Display</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-particles" id="particles"></div>
+
+    <!-- Logo (animated between center and top-left) -->
+    <div class="display-logo" id="displayLogo">
+        <div class="logo-content">
+            <div class="play-icon-logo"></div>
+            <div class="logo-text">
+                <h1>ABIFLIX</h1>
+                <p>Nach 13 Staffeln abgesetzt</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Waiting State -->
+    <div class="waiting-state" id="waitingState" style="display: flex;">
+        <div class="waiting-text">Warte auf Abstimmung...</div>
+    </div>
+
+    <!-- Voting Active State -->
+    <div class="voting-active" id="votingActive" style="display: none;">
+        <h2 class="question-display" id="questionDisplay"></h2>
+
+        <div class="display-header">
+            <div class="timer-display" id="timerDisplay">0:00</div>
+        </div>
+
+        <div class="votes-container" id="votesContainer">
+            <!-- Voting bubbles will appear here -->
+        </div>
+    </div>
+
+    <!-- Results State -->
+    <div class="results-state" id="resultsState" style="display: none;">
+        <div class="results-header">
+            <h2>ERGEBNISSE</h2>
+            <div class="total-votes-display" id="totalVotesDisplay">0 Stimmen</div>
+        </div>
+
+        <div class="results-bars" id="resultsBars">
+            <!-- Result bars will be displayed here -->
+        </div>
+
+        <div class="winner-announcement" id="winnerAnnouncement" style="display: none;">
+            <div class="trophy">🏆</div>
+            <div class="winner-text"></div>
+        </div>
+    </div>
+
+    <script src="display.js"></script>
+</body>
+</html>

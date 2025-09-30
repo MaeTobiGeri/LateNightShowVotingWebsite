@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abiflix - Maintenance Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            color: #e5e7eb;
+        }
+
+        /* Login Screen */
+        .login-container {
+            max-width: 420px;
+            margin: 100px auto;
+            background: #1f2937;
+            border-radius: 16px;
+            padding: 48px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(239,68,68,0.2);
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-logo h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ef4444;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .login-logo p {
+            color: #9ca3af;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: #e5e7eb;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            padding: 12px 14px;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            background: #111827;
+            color: #f3f4f6;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ef4444;
+            background: #1a1f2e;
+            box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+        }
+
+        .login-button {
+            padding: 14px;
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-button:hover {
+            background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            background: #7f1d1d;
+            border: 1px solid #ef4444;
+            color: #fecaca;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+            font-size: 14px;
+        }
+
+        /* Main Container */
+        .container {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: none;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 24px;
+            padding: 24px;
+            max-width: 1920px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1200px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            background: #1f2937;
+            border-bottom: 1px solid #374151;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .header-left h1 {
+            color: #ef4444;
+            margin-bottom: 4px;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: #9ca3af;
+            margin: 0;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .logout-button {
+            padding: 10px 20px;
+            background: #111827;
+            color: #e5e7eb;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .logout-button:hover {
+            background: #1f2937;
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        .panel {
+            background: #1f2937;
+            border-radius: 12px;
+            padding: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            border: 1px solid #374151;
+            overflow: hidden;
+        }
+
+        .section {
+            padding: 24px;
+            border-bottom: 1px solid #374151;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section h2 {
+            color: #f3f4f6;
+            margin-bottom: 20px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .upcoming-voting-item {
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.2s;
+        }
+
+        .upcoming-voting-item:hover {
+            background: #1a202e;
+            border-color: #ef4444;
+            box-shadow: 0 4px 12px rgba(239,68,68,0.15);
+        }
+
+        .voting-info {
+            flex: 1;
+        }
+
+        .voting-info h4 {
+            color: #f3f4f6;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .voting-info p {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            margin: 4px 0;
+            line-height: 1.5;
+        }
+
+        .voting-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .btn-small {
+            padding: 8px 14px;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e5e7eb;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.2s;
+            background: #111827;
+            color: #f3f4f6;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #ef4444;
+            background: #1a1f2e;
+            box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+        }
+
+        input::placeholder {
+            color: #6b7280;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .options-container {
+            margin-bottom: 15px;
+        }
+
+        .option-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .option-input input {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .btn-remove {
+            padding: 10px 14px;
+            background: #7f1d1d;
+            color: #fca5a5;
+            border: 1px solid #991b1b;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn-remove:hover {
+            background: #991b1b;
+            color: #fecaca;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #dc2626;
+            box-shadow: 0 4px 12px rgba(239,68,68,0.4);
+        }
+
+        .btn-success {
+            background: #047857;
+            color: #d1fae5;
+            border: 1px solid #059669;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #d97706;
+            color: #fef3c7;
+            border: 1px solid #f59e0b;
+        }
+
+        .btn-warning:hover {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #7f1d1d;
+            color: #fca5a5;
+            border: 1px solid #991b1b;
+        }
+
+        .btn-danger:hover {
+            background: #991b1b;
+            color: #fecaca;
+        }
+
+        .status {
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            display: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status.success {
+            background: #065f46;
+            color: #d1fae5;
+            border: 1px solid #047857;
+        }
+
+        .status.error {
+            background: #7f1d1d;
+            color: #fecaca;
+            border: 1px solid #991b1b;
+        }
+
+        .current-state {
+            background: #111827;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #374151;
+        }
+
+        .current-state h3 {
+            margin-bottom: 12px;
+            color: #f3f4f6;
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .current-state p {
+            margin: 8px 0;
+            color: #d1d5db;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .current-state strong {
+            color: #f3f4f6;
+            font-weight: 600;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #10b981;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-logo">
+            <h1>🎬 ABIFLIX</h1>
+            <p>Maintenance Panel</p>
+        </div>
+        <div class="error-message" id="loginError">Ungültige Anmeldedaten!</div>
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <label for="username">Benutzername</label>
+                <input type="text" id="username" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Passwort</label>
+                <input type="password" id="password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="login-button">Anmelden</button>
+        </form>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" id="mainContainer">
+        <div class="header">
+            <div class="header-left">
+                <h1>🎬 Abiflix Maintenance Panel</h1>
+                <p class="subtitle">Verwalte Live-Voting Optionen</p>
+            </div>
+            <button class="logout-button" onclick="logout()">Abmelden</button>
+        </div>
+
+        <div class="main-grid">
+            <!-- Left Panel: Current Voting -->
+            <div class="panel">
+                <div class="section">
+                    <h2>Aktuelles Voting</h2>
+                    <div class="current-state" id="currentState">
+                        <h3>Lade Daten...</h3>
+                    </div>
+                    <div id="activeVotingControls" style="margin-top: 15px; display: none;">
+                        <button class="btn-danger" onclick="stopVoting()">Voting Stoppen</button>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Neues Voting Erstellen</h2>
+
+                    <label for="question">Frage:</label>
+                    <input type="text" id="question" placeholder="Welchen Film-Song spielt die Band gerade?">
+
+                    <label for="timeLeft">Zeit (Sekunden):</label>
+                    <input type="number" id="timeLeft" placeholder="45" min="0" value="45">
+
+                    <label>Optionen:</label>
+                    <div class="options-container" id="optionsContainer">
+                        <div class="option-input">
+                            <input type="text" placeholder="Option 1" class="option-field">
+                            <button class="btn-remove" onclick="removeOption(this)">✕</button>
+                        </div>
+                    </div>
+                    <button class="btn-success" onclick="addOption()">+ Option hinzufügen</button>
+
+                    <div style="margin-top: 20px;">
+                        <button class="btn-primary" onclick="createVoting()">Voting Speichern</button>
+                    </div>
+                </div>
+
+                <div class="status" id="status"></div>
+            </div>
+
+            <!-- Right Panel: Upcoming Votings -->
+            <div class="panel">
+                <div class="section">
+                    <h2>Bevorstehende Votings</h2>
+                    <div id="upcomingVotingsList">
+                        <p style="color: #9ca3af; text-align: center; padding: 20px;">Keine bevorstehenden Votings</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="maintenance.js"></script>
+</body>
+</html>

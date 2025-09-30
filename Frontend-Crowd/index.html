@@ -20,7 +20,7 @@
                     <p>Nach 13 Staffeln abgesetzt</p>
                 </div>
             </div>
-            <div class="stats">
+            <div class="stats" id="statsContainer" style="display: none;">
                 <div class="stat-item">
                     <svg class="stat-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
@@ -28,7 +28,7 @@
                         <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
                         <circle cx="9" cy="7" r="4"/>
                     </svg>
-                    <span class="stat-value" id="totalVotes">127</span>
+                    <span class="stat-value" id="totalVotes">0</span>
                     <span>Live Votes</span>
                 </div>
                 <div class="stat-item">
@@ -56,33 +56,10 @@
                 </div>
             </div>
 
-            <h2 class="question-title" id="questionTitle">Welchen Film-Song spielt die Band gerade?</h2>
+            <h2 class="question-title" id="questionTitle">Warte auf Abstimmung...</h2>
 
             <div class="options-grid" id="optionsGrid">
-                <div class="option" data-index="0">
-                    <div class="option-content">
-                        <span class="option-letter">A</span>
-                        <span class="option-text">Test - Test</span>
-                    </div>
-                </div>
-                <div class="option" data-index="1">
-                    <div class="option-content">
-                        <span class="option-letter">B</span>
-                        <span class="option-text">Test - Test</span>
-                    </div>
-                </div>
-                <div class="option" data-index="2">
-                    <div class="option-content">
-                        <span class="option-letter">C</span>
-                        <span class="option-text">Test - Test</span>
-                    </div>
-                </div>
-                <div class="option" data-index="3">
-                    <div class="option-content">
-                        <span class="option-letter">D</span>
-                        <span class="option-text">Test - Test</span>
-                    </div>
-                </div>
+                <p style="text-align: center; color: #999; padding: 20px;">Keine Abstimmung aktiv. Bitte warten...</p>
             </div>
 
             <div class="vote-button-container">
@@ -92,7 +69,7 @@
             </div>
 
             <div class="status-message" id="statusMessage">
-                <span class="status-choose">Wähle deine Antwort!</span>
+                <span class="status-choose">Keine aktive Abstimmung</span>
             </div>
         </div>
     </div>
