@@ -75,8 +75,8 @@ function createAmbientVotePulse(optionIndex) {
     if (!votingData || !votingData.options) return;
 
     const colors = [
-        '#dc2626', '#ea580c', '#16a34a', '#2563eb',
-        '#9333ea', '#db2777', '#0891b2', '#ca8a04'
+        '#dc2626', '#ea580c', '#f97316', '#fb923c',
+        '#ef4444', '#f87171', '#fbbf24', '#fb7185'
     ];
     
     const color = colors[optionIndex % colors.length];
@@ -117,85 +117,26 @@ function createAmbientVotePulse(optionIndex) {
     }
 
     requestAnimationFrame(animateGlow);
-
-    // Create letter indicator at a corner
-    const positions = [
-        { top: '15%', right: '10%' },
-        { top: '15%', left: '10%' },
-        { bottom: '20%', right: '10%' },
-        { bottom: '20%', left: '10%' }
-    ];
-    
-    const pos = positions[Math.floor(Math.random() * positions.length)];
-    
-    const indicator = document.createElement('div');
-    indicator.style.position = 'fixed';
-    Object.assign(indicator.style, pos);
-    indicator.style.fontSize = '3rem';
-    indicator.style.fontWeight = '800';
-    indicator.style.color = color;
-    indicator.style.textShadow = `
-        0 0 40px ${color},
-        0 0 20px ${color},
-        0 4px 20px rgba(0,0,0,0.8)
-    `;
-    indicator.style.pointerEvents = 'none';
-    indicator.style.zIndex = '30';
-    indicator.style.opacity = '0';
-    indicator.style.transform = 'scale(0.5)';
-    indicator.textContent = letters[optionIndex];
-    
-    votesContainer.appendChild(indicator);
-
-    const indicatorStart = performance.now();
-    const indicatorDuration = 1200;
-
-    function animateIndicator(currentTime) {
-        const elapsed = currentTime - indicatorStart;
-        const progress = Math.min(elapsed / indicatorDuration, 1);
-
-        if (progress < 0.2) {
-            // Pop in
-            const popProgress = progress / 0.2;
-            indicator.style.opacity = popProgress;
-            indicator.style.transform = `scale(${0.5 + popProgress * 0.7})`;
-        } else if (progress < 0.8) {
-            // Hold
-            indicator.style.opacity = '1';
-            indicator.style.transform = 'scale(1.2)';
-        } else {
-            // Fade out
-            const fadeProgress = (progress - 0.8) / 0.2;
-            indicator.style.opacity = 1 - fadeProgress;
-            indicator.style.transform = `scale(${1.2 + fadeProgress * 0.3})`;
-        }
-
-        if (progress < 1) {
-            requestAnimationFrame(animateIndicator);
-        } else {
-            indicator.remove();
-        }
-    }
-
-    requestAnimationFrame(animateIndicator);
 }
 
 // Create energy particles flowing into the center
 function createEnergyFlow(optionIndex, count) {
     const colors = [
-        '#dc2626', '#ea580c', '#16a34a', '#2563eb',
-        '#9333ea', '#db2777', '#0891b2', '#ca8a04'
+        '#dc2626', '#ea580c', '#f97316', '#fb923c',
+        '#ef4444', '#f87171', '#fbbf24', '#fb7185'
     ];
-    
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+
     const color = colors[optionIndex % colors.length];
+    const letter = letters[optionIndex];
     const particleCount = Math.min(15, Math.ceil(count / 2));
-    
+
     for (let i = 0; i < particleCount; i++) {
         setTimeout(() => {
             const particle = document.createElement('div');
             particle.style.position = 'fixed';
-            particle.style.width = '12px';
-            particle.style.height = '12px';
+            particle.style.width = '18px';
+            particle.style.height = '18px';
             particle.style.borderRadius = '50%';
             particle.style.background = color;
             particle.style.boxShadow = `0 0 20px ${color}, 0 0 10px ${color}`;

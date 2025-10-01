@@ -23,7 +23,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 100;
-    transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 1s ease-in-out;
 }
 
 .display-logo.compact {
@@ -37,7 +37,6 @@ body {
     flex-direction: row;
     align-items: center;
     gap: 20px;
-    transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .display-logo.compact .logo-content {
@@ -53,7 +52,7 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 1s ease-in-out;
     flex-shrink: 0;
     box-shadow: 0 10px 40px rgba(220, 38, 38, 0.4);
 }
@@ -69,7 +68,7 @@ body {
     content: "▶";
     font-size: 60px;
     color: white;
-    transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 1s ease-in-out;
     margin-left: 5px;
 }
 
@@ -80,7 +79,7 @@ body {
 
 .logo-text {
     text-align: center;
-    transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 1s ease-in-out;
 }
 
 .display-logo.compact .logo-text {
@@ -93,7 +92,7 @@ body {
     color: #ef4444;
     margin: 0;
     letter-spacing: -3px;
-    transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 1s ease-in-out;
     text-shadow: 0 4px 20px rgba(239, 68, 68, 0.5);
 }
 
@@ -107,7 +106,7 @@ body {
     font-size: 2rem;
     color: #d1d5db;
     margin: 0;
-    transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 1s ease-in-out;
     font-weight: 300;
 }
 
@@ -220,7 +219,7 @@ body {
     border: 2px solid rgba(239, 68, 68, 0.25);
     backdrop-filter: blur(15px);
     letter-spacing: -1.5px;
-    animation: slideInQuestion 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: slideInQuestion 0.8s ease-out 0.6s both;
 }
 
 @keyframes slideInQuestion {
